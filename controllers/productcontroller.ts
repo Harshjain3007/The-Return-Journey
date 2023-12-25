@@ -4,16 +4,19 @@ import { getDataStore, addItem } from "../datastores/datastore";
 
 const router = express.Router();
 
+//This endpoint will create a new data inside the in memory datastore(array)
 router.post("/", (req: Request, res: Response) => {
   const newProduct: Product = req.body;
   addItem(newProduct);
   res.status(201).json(newProduct);
 });
 
+//This endpoint will get all the  documents from the datastore
 router.get("/getallproducts", (req: Request, res: Response) => {
   res.status(200).json(getDataStore());
 });
 
+//This end point will return a document with a particular id
 router.get("/getproductbyid/:productid", (req: Request, res: Response) => {
   let productid = Number(req.params.productid);
   const products = getDataStore();
@@ -24,6 +27,7 @@ router.get("/getproductbyid/:productid", (req: Request, res: Response) => {
   return res.status(200).json(product);
 });
 
+// This endpoint will update a particular document by its id
 router.put("/updateproductbyid", (req: Request, res: Response) => {
   let productid = Number(req.body.productid);
   const updatedFields = req.body;
@@ -38,6 +42,7 @@ router.put("/updateproductbyid", (req: Request, res: Response) => {
   return res.status(200).json(products[producttoupdate]);
 });
 
+//This endpoint will delete a document by its id
 router.delete("/deleteproductid/:productid", (req: Request, res: Response) => {
   let productid = Number(req.params.productid);
   const products = getDataStore();
@@ -45,7 +50,6 @@ router.delete("/deleteproductid/:productid", (req: Request, res: Response) => {
     (product) => product.id == productid
   );
   products.splice(producttoupdate, 1);
-  console.log("Updated Products Array:", products);
   return res.status(200).send({ message: "product deleted successfully" });
 });
 

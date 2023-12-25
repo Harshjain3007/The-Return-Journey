@@ -47,7 +47,7 @@
 - create a seperate folder for Jest and a seperate file for unit testing of api endpoints in product controllers.
 - install the jest library.
 - import the apis from a particular controller that we you to test.
-- run npm test after allowing the jest script in package.json file
+- run npm test 
 
 
 # Procedure to clone the Project
