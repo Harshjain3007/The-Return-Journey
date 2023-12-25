@@ -11,7 +11,7 @@ router.post("/", (req: Request, res: Response) => {
 });
 
 router.get("/getallproducts", (req: Request, res: Response) => {
-  res.json(getDataStore());
+  res.status(200).json(getDataStore());
 });
 
 router.get("/getproductbyid/:productid", (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ router.get("/getproductbyid/:productid", (req: Request, res: Response) => {
   if (!product) {
     return res.status(400).send({ message: "product not found" });
   }
-  return res.json(product);
+  return res.status(200).json(product);
 });
 
 router.put("/updateproductbyid", (req: Request, res: Response) => {
@@ -35,10 +35,10 @@ router.put("/updateproductbyid", (req: Request, res: Response) => {
     ...products[producttoupdate],
     ...updatedFields,
   };
-  return res.json(products[producttoupdate]);
+  return res.status(200).json(products[producttoupdate]);
 });
 
-router.delete("/deleteproductid/:productod", (req: Request, res: Response) => {
+router.delete("/deleteproductid/:productid", (req: Request, res: Response) => {
   let productid = Number(req.params.productid);
   const products = getDataStore();
   const producttoupdate = products.findIndex(
